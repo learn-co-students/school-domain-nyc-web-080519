@@ -1,42 +1,30 @@
 require 'pry'
-
-class School 
+class School
   
   attr_accessor :name, :roster
-  
+
   def initialize(name)
-    @name = name 
-    @roster = {}
-    
+      @name = name
+      @roster = {}
+    end
+  
+  def add_student(student_name, grade)
+    roster[grade] ||= []
+    roster[grade] << student_name
+  end 
+
+  def grade(grade_of_students) 
+    roster[grade_of_students]
   end 
   
-    def add_student(student_name, grade)
-      roster[grade] ||= []
-      roster[grade] << student_name
-    end 
-    
-=begin
-    def grade(grade)
-      roster.select do |key, value| 
-        kids = value.flatten
-        if key == grade
-        return kids
-        end
-      end
-=end
+  def sort
+    sorter = {}
+   ham = roster.sort
+     ham.each do |x, y|
+       sorter[x] = y.sort
+       #binding.pry
+     end
+    sorter
+  end
 
-    def grade(student_grade)
-      roster[student_grade]
-    end 
-    
-    def sort
-      sorter = {}
-      
-      roster.each { |k,v| sorter[k] = v.sort!}
-      sorter
-    #binding.pry
-    end 
-    
-end #class end 
-
-
+end #class end
